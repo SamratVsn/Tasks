@@ -8,9 +8,6 @@ interface AppContainer {
     val userPreferencesRepository: PreferenceRepository
 }
 
-/**
- * [AppContainer] implementation that provides instance of [OfflineToDoRepository]
- */
 class AppDataContainer(private val context: Context) : AppContainer {
     /**
      * Implementation for [ToDoRepository]

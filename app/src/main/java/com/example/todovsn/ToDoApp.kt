@@ -75,8 +75,7 @@ fun ToDoApp(
                     contentAlignment = Alignment.BottomCenter
                 ) {
                     ToDoBottomNavigation(navController = navController)
-                    
-                    // Floating FAB elevated above the bar
+
                     FloatingActionButton(
                         onClick = { navController.navigate(AddToDoDestination.route) },
                         shape = CircleShape,
