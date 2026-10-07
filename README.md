@@ -1,201 +1,307 @@
 # Tasks 🚀
 
-![Kotlin](https://img.shields.io/badge/Kotlin-2.2.10-7F52FF?logo=kotlin&logoColor=white)
-![Jetpack Compose](https://img.shields.io/badge/Jetpack%20Compose-Material%203-4285F4?logo=android&logoColor=white)
-![Min SDK](https://img.shields.io/badge/Min%20SDK-26%20(Android%208.0)-3DDC84?logo=android&logoColor=white)
+![Kotlin](https://img.shields.io/badge/Kotlin-2.2.10-7F52FF?logo=kotlin\&logoColor=white)
+![Jetpack Compose](https://img.shields.io/badge/Jetpack%20Compose-Material%203-4285F4?logo=android\&logoColor=white)
+![Min SDK](https://img.shields.io/badge/Min%20SDK-26%20\(Android%208.0\)-3DDC84?logo=android\&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-Tasks is a sleek, modern, and productivity-focused task management app built with **Jetpack Compose** and **Material 3**. Create tasks, organize them by category, stay on track with search and filtering, build focus with a Pomodoro-style timer, and watch your progress on a personalized profile — all stored locally on your device.
+**Tasks** is a modern Android productivity platform built with **Kotlin, Jetpack Compose, and Material 3**.
+
+It goes beyond basic task management with categories, search and filtering, focus sessions, reminders, personalization, dynamic theming, and persistent offline data — all designed around a clean and focused user experience.
+
+> **From a simple To-Do app to a complete productivity experience.**
 
 ---
 
-## Table of Contents
+## 📱 Screenshots
 
-*   [Screenshots](#screenshots)
-*   [Key Features](#key-features-)
-*   [Tech Stack](#tech-stack-)
-*   [Architecture](#architecture-️)
-*   [Project Structure](#project-structure-)
-*   [Getting Started](#getting-started-)
-*   [Testing](#testing-)
-*   [Requirements](#requirements-)
-*   [Future Roadmap](#future-roadmap-)
-*   [Contributing](#contributing-)
-*   [Author](#author-)
-*   [License](#license-)
+<table>
+<tr>
+<td><img src="Screenshots/Home.png" alt="Tasks Home" /></td>
+<td><img src="Screenshots/Focus.png" alt="Focus Session" /></td>
+<td><img src="Screenshots/Categories.png" alt="Categories" /></td>
+<td><img src="Screenshots/Profile.png" alt="Profile" /></td>
+</tr>
+</table>
 
----
-
-## Screenshots
-
-| Home | Focus | Categories | Profile |
-|------|-------|------------|---------|
-| ![](Screenshots/Home.png) | ![](Screenshots/Focus.png) | ![](Screenshots/Categories.png) | ![](Screenshots/Profile.png) |
-
-| Settings | Add Task | Task Details |
-|----------|----------|--------------|
-| ![](Screenshots/Settings.png) | ![](Screenshots/Add.png) | ![](Screenshots/Details.png) |
+<table>
+<tr>
+<td><img src="Screenshots/Settings.png" alt="Settings" /></td>
+<td><img src="Screenshots/Add.png" alt="Add Task" /></td>
+<td><img src="Screenshots/Details.png" alt="Task Details" /></td>
+</tr>
+</table>
 
 ---
 
-## Key Features ✨
+## ✨ Features
 
-*   **Task Management**: Create, edit, delete, and complete tasks with a clean UI. Deleting a task offers an **Undo** action to restore it.
-*   **Validation**: Task titles must be at least 3 non-blank characters, enforced both in the UI (disabled save button) and the ViewModel.
-*   **Search & Filter**: Find tasks instantly with case-insensitive search across titles and descriptions, combined with category-based filtering.
-*   **Focus Sessions**: Integrated Pomodoro-style timer with preset durations (15m, 25m, 45m, 60m) plus a custom duration picker (1–120 min). Completed sessions are counted per day with a celebration dialog.
-*   **Personalized Profile**: Real-time statistics — all-time tasks created, completed count, today's tasks, and today's focus sessions — alongside a customizable display name and motivational bios.
-*   **Dynamic Theming**: System Default, Light Mode, and a custom "Deep Sea" Dark Mode, persisted across restarts.
-*   **Custom Navigation**: Floating bottom navigation bar with an elevated center FAB for quick task entry, preserving each tab's state.
-*   **Smart Reminders**: A persisted reminders preference toggle in Settings (notification scheduling is on the roadmap).
-*   **Category Management**: Ships with defaults (Study, Work, Productive, Personal, Important). Add trimmed custom categories; deleting one safely moves its tasks back to `Personal`.
-*   **Data Management**: Reset your all-time counter or wipe all tasks and preferences, each behind a confirmation dialog.
-*   **Persistent Storage**: Room database for tasks and categories, DataStore Preferences for theme, name, counters, and settings — including daily rollover of the focus-session count.
-*   **Polished UI/UX**: Splash screen, gradient backgrounds, custom animations, and refined Material 3 components.
+### 📋 Task Management
+
+* Create, edit, complete, and delete tasks
+* Undo deleted tasks
+* Task validation with ViewModel-level safeguards
+* Organize tasks with categories
+
+### 🔎 Search & Organization
+
+* Case-insensitive search across titles and descriptions
+* Combine search with category filters
+* Create and manage custom categories
+* Safely move tasks when categories are deleted
+
+### ⏱️ Focus Sessions
+
+* Pomodoro-style focus timer
+* Presets: **15, 25, 45, and 60 minutes**
+* Custom sessions from **1–120 minutes**
+* Daily focus-session tracking
+* Completion feedback and celebration
+
+### 👤 Personalization
+
+* Custom display name and motivational bio
+* Real-time productivity statistics
+* All-time and daily task statistics
+* Daily focus-session statistics
+
+### 🎨 Theming & UI
+
+* System Default and Light themes
+* Custom **Deep Sea** dark theme
+* Theme preferences persist across app restarts
+* Material 3 components
+* Custom animations and transitions
+* Floating bottom navigation with center task-action FAB
+* Edge-to-edge UI and splash screen
+
+### 🔔 Reminders
+
+* Persisted Smart Reminders preference
+* Notification scheduling planned for a future release
+
+### 💾 Local & Offline Data
+
+* Room database for tasks and categories
+* DataStore Preferences for user settings
+* Persistent data across app restarts
+* Daily focus-session rollover
 
 ---
 
-## Tech Stack 🛠
+## 🛠️ Tech Stack
 
-| Layer | Technology |
-|-------|------------|
-| Language | **Kotlin** 2.2.10 |
-| UI | **Jetpack Compose** (BOM 2026.02.01) + **Material 3** |
-| Navigation | **Navigation Compose** 2.9.8 (single-activity, string routes) |
-| Local DB | **Room** 3.0.0-alpha05 (entities, DAOs, `MIGRATION_6_7` seed) |
-| Preferences | **DataStore Preferences** 1.2.1 |
-| Async | **Coroutines & Flow** (`StateFlow`, `combine`, `stateIn`) |
-| State | **ViewModel** + lifecycle-aware `collectAsStateWithLifecycle` |
-| DI | Manual **`AppContainer`** (`AppDataContainer`) wired via `AppViewModelProvider.Factory` |
-| Launch | **SplashScreen API** + edge-to-edge |
-| Desugaring | `desugar_jdk_libs` 2.1.4 (`java.time` support back to min SDK) |
-| Testing | **JUnit 4** + **kotlinx-coroutines-test** (fake-repository ViewModel tests) |
+| Area                     | Technology                        |
+| ------------------------ | --------------------------------- |
+| **Language**             | Kotlin 2.2.10                     |
+| **UI**                   | Jetpack Compose + Material 3      |
+| **Architecture**         | MVVM + Repository Pattern         |
+| **State**                | ViewModel + StateFlow + Flow      |
+| **Navigation**           | Navigation Compose                |
+| **Database**             | Room                              |
+| **Preferences**          | DataStore Preferences             |
+| **Async**                | Kotlin Coroutines + Flow          |
+| **Dependency Injection** | Manual AppContainer               |
+| **Testing**              | JUnit 4 + kotlinx-coroutines-test |
+| **Minimum SDK**          | Android 8.0 (API 26)              |
+| **Build**                | Gradle + Android Gradle Plugin    |
 
----
+### Core Android Technologies
 
-## Architecture 🏛️
-
-The project follows **MVVM** with the **Repository Pattern** and unidirectional data flow:
-
-*   **Presentation**: Compose screens (Home, Focus, Category, Profile, Settings, Add/Edit, Details) observe `StateFlow` UI state from their ViewModels; events flow up via ViewModel functions.
-*   **Domain**: `ToDoRepository` / `PreferenceRepository` abstract data access. Pure, framework-free rules (title validation, task filtering, focus rollover, name normalization) live in top-level functions so they are unit-testable.
-*   **Data**: Room (`ToDoDao`, `CategoryDao`, `ToDoDatabase` with `DateConverters`) and a Preferences DataStore (`UserPreferences`, `ThemeMode`).
-*   **Navigation**: Centralized `ToDoNavHost` manages the app flow within a single `MainActivity`; `ToDoApp` provides the scaffold, floating nav bar, and center FAB.
+`Kotlin` · `Jetpack Compose` · `Material 3` · `Room` · `DataStore` · `Navigation Compose` · `ViewModel` · `StateFlow` · `Coroutines` · `JUnit`
 
 ---
 
-## Project Structure 📂
+## 🏗️ Architecture
+
+Tasks follows **MVVM**, the **Repository Pattern**, and **unidirectional data flow**.
+
+```text
+┌──────────────────────────────┐
+│        Compose UI            │
+│  Screens · Components · UI   │
+└──────────────┬───────────────┘
+               │ UI Events
+               ▼
+┌──────────────────────────────┐
+│         ViewModels           │
+│     StateFlow · UI State     │
+└──────────────┬───────────────┘
+               │
+               ▼
+┌──────────────────────────────┐
+│         Repositories         │
+│  ToDoRepository              │
+│  PreferenceRepository        │
+└──────────────┬───────────────┘
+               │
+       ┌───────┴────────┐
+       ▼                ▼
+┌─────────────┐  ┌───────────────┐
+│    Room     │  │   DataStore   │
+│ Tasks +     │  │ Preferences   │
+│ Categories  │  │ & Settings    │
+└─────────────┘  └───────────────┘
+```
+
+### Architecture Highlights
+
+* **Presentation:** Compose screens observe UI state from ViewModels.
+* **State:** `StateFlow`, `Flow`, and lifecycle-aware state collection.
+* **Data access:** Repositories abstract Room and DataStore operations.
+* **Persistence:** Room handles structured local data while DataStore handles preferences.
+* **Navigation:** Centralized Navigation Compose flow within a single activity.
+* **Testing:** Business logic and ViewModel behavior are covered with JVM unit tests.
+
+---
+
+## 📂 Project Structure
 
 ```text
 app/
 ├── src/main/java/com/example/todovsn/
 │   ├── data/
-│   │   ├── ToDoItem.kt / Category.kt      # Room entities
-│   │   ├── ToDoDao.kt / CategoryDao.kt    # DAOs
-│   │   ├── ToDoDatabase.kt                # DB, MIGRATION_6_7, DateConverters
-│   │   ├── ToDoRepository.kt / OfflineToDoRepository.kt
-│   │   ├── AppContainer.kt                # Manual DI
-│   │   └── preference/                    # UserPreferences, PreferenceRepository
+│   │   ├── ToDoItem.kt
+│   │   ├── Category.kt
+│   │   ├── ToDoDao.kt
+│   │   ├── CategoryDao.kt
+│   │   ├── ToDoDatabase.kt
+│   │   ├── ToDoRepository.kt
+│   │   ├── OfflineToDoRepository.kt
+│   │   ├── AppContainer.kt
+│   │   └── preference/
+│   │
 │   ├── ui/
-│   │   ├── home/                          # Home screen + HomeViewModel
-│   │   ├── screens/                       # Add/Edit/Details/Focus/Category/
-│   │   │                                  # Profile/Settings + ViewModels
-│   │   ├── components/                    # Shared dialogs & UI pieces
-│   │   ├── navigation/                    # Destinations + ToDoNavGraph
-│   │   ├── theme/                         # Deep Sea colors, Typography
-│   │   └── AppViewModelProvider.kt        # ViewModel factory
-│   ├── ToDoApp.kt                         # Scaffold + floating nav + FAB
-│   ├── MainActivity.kt                    # Entry point, theme, splash
-│   └── ToDoApplication.kt                 # App container init
-└── src/test/java/com/example/todovsn/      # Local unit tests (see Testing)
+│   │   ├── home/
+│   │   ├── screens/
+│   │   ├── components/
+│   │   ├── navigation/
+│   │   ├── theme/
+│   │   └── AppViewModelProvider.kt
+│   │
+│   ├── ToDoApp.kt
+│   ├── MainActivity.kt
+│   └── ToDoApplication.kt
+│
+└── src/test/
+    └── java/com/example/todovsn/
 ```
 
 ---
 
-## Getting Started ⚙️
+## 🧪 Testing
 
-### Prerequisites
+Tasks currently includes **38 JVM unit tests across 7 test classes**.
 
-*   **Android Studio** (Ladybug or newer — bundles the JDK required by AGP 9.x)
-*   An emulator or device running **Android 8.0 (API 26)+**
-
-### Steps
-
-1.  **Clone the repo**:
-    ```bash
-    git clone https://github.com/SamratVsn/Todovsn.git
-    ```
-2.  **Open in Android Studio**:
-    Select `Open` and navigate to the project folder.
-3.  **Sync & Build**:
-    Wait for Gradle to sync dependencies (`./gradlew assembleDebug` from the terminal works too).
-4.  **Run**:
-    Click `Run` to deploy to your device or emulator.
-
----
-
-## Testing 🧪
-
-Local unit tests live in `app/src/test/` — **38 tests across 7 classes**, runnable on the JVM with no device needed:
+Run the test suite with:
 
 ```bash
 ./gradlew :app:testDebugUnitTest
 ```
 
-| Test class | What it covers |
-|------------|----------------|
-| `ToDoValidationTest` | Title rule: blank/short invalid, 3+ chars valid, trim handling |
-| `ToDoMappingTest` | `ToDoDetails` ↔ `ToDoItem` field preservation + round-trip |
-| `FocusUiStateTest` | `MM:SS` formatting, progress fractions, zero-total guard |
-| `CategoryFilterTest` | Search (title/desc, case-insensitive) × category filtering |
-| `PreferencesLogicTest` | Daily focus-session rollover, display-name normalization |
-| `DateConvertersTest` | Room converter round-trips, null-safety, corrupt-data tolerance |
-| `HomeViewModelTest` | Delete, undo-restore, toggle-complete via fake repository |
+| Test                   | Coverage                                    |
+| ---------------------- | ------------------------------------------- |
+| `ToDoValidationTest`   | Task title validation and trimming          |
+| `ToDoMappingTest`      | Task model ↔ database model mapping         |
+| `FocusUiStateTest`     | Timer formatting and progress calculations  |
+| `CategoryFilterTest`   | Search and category filtering               |
+| `PreferencesLogicTest` | Daily focus rollover and name normalization |
+| `DateConvertersTest`   | Room date conversion and null handling      |
+| `HomeViewModelTest`    | Delete, undo, and completion behavior       |
 
 ---
 
-## Requirements 📋
+## 🚀 Getting Started
 
-*   **Min SDK**: 26 (Android 8.0)
-*   **Target / Compile SDK**: 37 (Android 15)
-*   **App version**: 1.0 (`versionCode 1`)
-*   **Kotlin**: 2.2.10
-*   **AGP**: 9.4.0 · **Gradle wrapper**: 9.6.0
+### Requirements
+
+* **Android Studio** Ladybug or newer
+* JDK compatible with the project's Android Gradle Plugin
+* Android device or emulator running **Android 8.0 / API 26+**
+
+### Clone
+
+```bash
+git clone https://github.com/SamratVsn/Todovsn.git
+cd Todovsn
+```
+
+### Open
+
+Open the project in Android Studio and allow Gradle to sync.
+
+### Build
+
+```bash
+./gradlew assembleDebug
+```
+
+### Run Tests
+
+```bash
+./gradlew :app:testDebugUnitTest
+```
+
+Then run the app on a connected device or emulator from Android Studio.
 
 ---
 
-## Future Roadmap 🚀
+## 🗺️ Roadmap
 
-*   **Reminder notifications**: scheduling behind the existing Smart Reminders toggle.
-*   **Cloud Sync**: Firebase integration for multi-device synchronization.
-*   **Custom Tags**: Personal labels for better task organization.
-*   **Atomic category moves**: transactional `deleteCategoryAndMoveTasks` + foreign-key integrity.
-*   **Interactive Widgets**: Access your tasks directly from the home screen.
-*   **Detailed Analytics**: Visual charts for weekly and monthly productivity trends.
+Planned improvements include:
 
----
-
-## Contributing 🤝
-
-Contributions are welcome! Please:
-
-1.  Fork the repo and create a feature branch (`git checkout -b feature/my-change`).
-2.  Add or update unit tests under `app/src/test/` for logic changes.
-3.  Make sure `./gradlew :app:testDebugUnitTest` passes.
-4.  Open a pull request with a clear description.
+* 🔔 Reminder notification scheduling
+* ☁️ Firebase cloud synchronization
+* 🏷️ Custom task tags
+* 📱 Interactive home-screen widgets
+* 📊 Detailed productivity analytics
+* 🔄 Improved category operations and data integrity
 
 ---
 
-## Author 👤
+## 🤝 Contributing
+
+Contributions, ideas, and improvements are welcome.
+
+1. Fork the repository.
+2. Create a feature branch:
+
+```bash
+git checkout -b feature/my-change
+```
+
+3. Make your changes.
+4. Add or update tests where appropriate.
+5. Run the test suite:
+
+```bash
+./gradlew :app:testDebugUnitTest
+```
+
+6. Open a pull request with a clear description of your changes.
+
+---
+
+## 👨‍💻 Author
 
 **Samrat Parajuli**
 
-*   **GitHub**: [@SamratVsn](https://github.com/SamratVsn)
-*   **Portfolio**: [samratparajuli0.com.np](https://www.samratparajuli0.com.np/)
-*   **LinkedIn**: [Samrat Parajuli](https://linkedin.com/in/samratvsn)
+Android Developer focused on **Kotlin, Jetpack Compose, and modern Android development**.
+
+* GitHub: [@SamratVsn](https://github.com/SamratVsn)
+* Portfolio: [samratparajuli0.com.np](https://www.samratparajuli0.com.np/)
+* LinkedIn: [Samrat Parajuli](https://linkedin.com/in/samratvsn)
 
 ---
 
-## License 📄
+## 📄 License
 
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+This project is licensed under the **MIT License**. See [`LICENSE`](LICENSE) for details.
+
+---
+
+<div align="center">
+
+**Built with Kotlin & Jetpack Compose ❤️**
+
+</div>
